@@ -1,0 +1,25 @@
+@mixin image-tool(){
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+@mixin phone-size{
+    @media(max-width:414px){
+      @content;
+    }
+  }
+
+// /indeximg/ 
+
+.banner{
+    /*暫時給他H*/ 
+    padding-top: 50px;
+    padding-bottom: 50px;
+    height: auto;
+    @include image-tool;
+    background-image:url(https://park24.com.tw/wp-content/uploads/2019/01/karl-kohler-547636-unsplash-1280x720.jpg);
+}
+
+#map { max-width: 100%;max-height: 100%; }
