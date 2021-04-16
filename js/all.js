@@ -18,7 +18,7 @@ let ary=[];
     .then(function (response) {
     ary=response.data.data;
     console.log(ary);
-    
+    render(ary)
    
     });
 
@@ -36,8 +36,25 @@ function render(item){
   
 }
 //////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////刪除
+function delrender(item){
+  item.forEach(function (item1,index){    
+    arry=(item1.lnglat).split(",") //將字串拆以逗點成陣列
+    
+     L.marker(arry).remove(map)
+    .bindPopup(`<h4>名稱:${item1.name}</h4> <p>行政區:${item1.zone}</p>
+    <p>總車格:${item1.car_total}</p><p>剩餘車格:${item1.car}</p>`)
+    .openPopup();     
+  })
+  
+}
+//////////////////////////////////////////////////////////////////////////////////////
+
+
 
 regionSearch.addEventListener('change', function (e) {  
+  delrender(ary)
 let zonedata=[];
   console.log(e.target.value);
   // console.log(ary);  
@@ -52,6 +69,7 @@ let zonedata=[];
     
   })
   console.log(zonedata);
+  delrender(ary);
   render(zonedata);
   
 }
