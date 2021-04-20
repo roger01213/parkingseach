@@ -14,14 +14,14 @@ function parkListdata(data) {
   let datalen = data.length;
   if (datalen > 10) { 
     for (let i = 0; i < 10; i++) {
-      let context = `<li class="py5"> <button type="button" class="btn btn-secondary  btn-lg btn-block" onclick="location.href='#map'"     data-lan=${i}>${data[i].name} 剩餘車格${data[i].car}</button></li> `;
+      let context = `<li class="py5"> <button type="button" class="btn btn-secondary  btn-lg btn-block" onclick="location.href='#map'"  data-lan=${i}>${data[i].name}●剩餘車格${data[i].car}</button></li> `;
       str += context;
     }
     parkList.innerHTML = str;
   } else {
     data.forEach(function (item, index) {
       // console.log(str);  
-      let context = `<li class="py5"> <button type="button" class="btn btn-secondary py20 btn-lg btn-block"  onclick="location.href='#map'"  data-lan=${index}>${item.name}剩餘車格${item.car} </button></li> `;
+      let context = `<li class="py5"> <button type="button" class="btn btn-secondary py20 btn-lg btn-block"  onclick="location.href='#map'"  data-lan=${index}>${item.name}●剩餘車格${item.car} </button></li> `;
       str += context;
     })
     parkList.innerHTML = str;
@@ -43,9 +43,7 @@ function parkListdata(data) {
       // map.setView(arry, 50)
       render(dataary);
       // renderData();
-    } else {
-      alert('你沒點到按鈕');
-    }
+    } 
   })
 
 }
@@ -95,6 +93,7 @@ axios.get('https://opengov.tainan.gov.tw/OpenApi/api/service/Get/c3604e1d-c4e1-4
 //render在地圖上渲染
 function render(item) {
   item.forEach(function (item1, index) {
+    if(item1){
     let arry = [];
     arry = (item1.lnglat).split(",") //將字串拆以逗點成陣列
     // console.log('arry',arry)
@@ -103,7 +102,8 @@ function render(item) {
     <p class="text-danger">剩餘車格:${item1.car}</p>
     <p>位址:${item1.address}</p> `)
       .openPopup();
-  })
+    }
+    })
 
 }
 
@@ -128,7 +128,7 @@ regionSearch.addEventListener('change', function (e) {
     }
 
   })
-  console.log(zonedata);
+  // console.log(zonedata);
   // delrender(ary);
   render(zonedata);
   parkListdata(zonedata)
