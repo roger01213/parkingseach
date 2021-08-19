@@ -1,4 +1,4 @@
-
+///抓取class元素/////
 const regionSearch = document.querySelector('.regionSearch');
 const dataBtn = document.querySelector('.dataBtn');
 const parkList = document.querySelector('.parkList');
@@ -7,7 +7,7 @@ const parkList = document.querySelector('.parkList');
 function parkListdata(data) {
   let str = "";
   ////////////////////CAR由大到小排序//////////////////////////////
-  data = data.sort(function (a, b) {
+  data = data.sort(function (a, b) {  //sort自訂義排序
     return a.car < b.car ? 1 : -1;
   });
   ////////////////////////最多顯示10筆資料/////////////////////////
@@ -29,10 +29,10 @@ function parkListdata(data) {
   }
 
 
-  ////////////////////////////////////////////////////////////////
+  //////////////////////////點選時監聽//////////////////////////////////////
 
   parkList.addEventListener('click', function (e) {
-    getFeaturesInView();
+    getFeaturesInView(); //每次觸發 移除地圖上的 marker
     if (e.target.getAttribute('type') == 'button') {
       let num = e.target.getAttribute('data-lan');
 
@@ -72,7 +72,7 @@ let map = L.map('map', {
   center: [22.604964, 120.300476],
   zoom: 16
 });
-
+////////////加入地圖資訊//////////////
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
@@ -108,7 +108,7 @@ function render(item) {
 }
 
 
-
+////////////////選擇行政區時會觸發///////////////
 
 regionSearch.addEventListener('change', function (e) {
   getFeaturesInView();
@@ -136,8 +136,8 @@ regionSearch.addEventListener('change', function (e) {
 }
 );
 
-
-
+////////////////////c3圖表產///////////////////////////
+/////////////////////顯示各區停車場分布/////////////////
 function calData(data) {
   let dataobj = {};
   data.forEach(function (item, index) {
@@ -176,7 +176,7 @@ function calData(data) {
 
 
 
-
+//////////////////////C3顯示拖吊區熱點分布///////////////////////
 function towdata() {
   let data = [];
   let ary = [];
