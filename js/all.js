@@ -4,6 +4,8 @@ const dataBtn = document.querySelector('.dataBtn');
 const parkList = document.querySelector('.parkList');
 
 
+
+//////////////////////////////////////////////渲染點選B按鈕FUNCTION///////////////////////////////////////////////////////////////////////////
 function parkListdata(data) {
   let str = "";
   ////////////////////CAR由大到小排序//////////////////////////////
@@ -48,9 +50,7 @@ function parkListdata(data) {
 
 }
 
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function getFeaturesInView() { // 移除地圖上的 marker
   map.eachLayer(function (layer) {
@@ -67,29 +67,7 @@ function getFeaturesInView() { // 移除地圖上的 marker
 
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-let map = L.map('map', {
-  center: [22.604964, 120.300476],
-  zoom: 16
-});
-////////////加入地圖資訊//////////////
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-let data = [];
-let ary = [];
-axios.get('https://opengov.tainan.gov.tw/OpenApi/api/service/Get/c3604e1d-c4e1-4224-9d41-084ce299c3bf')
-  .then(function (response) {
-    ary = response.data.data;
-    // console.log(ary);
-    render(ary)
-    calData(ary)
-    parkListdata(ary);
-  });
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
 //render在地圖上渲染
 function render(item) {
   item.forEach(function (item1, index) {
@@ -219,5 +197,38 @@ function towdata() {
     });
 }
 
-towdata()
+// towdata()
+
+////////////////////////////////////////載入地圖//////////////////////////////////////////////////////////////////
+let map = L.map('map', {
+  center: [22.604964, 120.300476],
+  zoom: 16
+});
+////////////加入地圖資訊//////////////
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+let data = [];
+let ary = [];
+axios.get('https://opengov.tainan.gov.tw/OpenApi/api/service/Get/c3604e1d-c4e1-4224-9d41-084ce299c3bf')
+  .then(function (response) {
+    ary = response.data.data;
+    // console.log(ary);
+    render(ary)
+    calData(ary)
+    parkListdata(ary);
+    towdata();
+
+  });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 
