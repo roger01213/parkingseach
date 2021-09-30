@@ -215,9 +215,9 @@ let ary = [];
 axios.get('https://opengov.tainan.gov.tw/OpenApi/api/service/Get/c3604e1d-c4e1-4224-9d41-084ce299c3bf')
   .then(function (response) {
     ary = response.data.data;
-    // console.log(ary);
-    render(ary)
-    calData(ary)
+    console.log(ary);
+   
+    calData(ary);
     parkListdata(ary);
     towdata();
 
